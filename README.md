@@ -1,11 +1,37 @@
-<div align="center">
+# PayPulse - Premium Fintech Payment Collection
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+PayPulse is a professional payment collection system designed for businesses to initiate real-time M-Pesa payment prompts (STK Push) and track transaction statuses in a sleek, mobile-ready dashboard.
 
-  <h1>Built with AI Studio</h2>
+## Features
+- **M-Pesa STK Push**: Initiate payments directly from the dashboard to customer phones.
+- **Real-time Monitoring**: Instant status updates (Pending, Completed, Failed) via Firebase onSnapshot.
+- **Secure Dashboard**: Admin and Staff roles with Firebase Authentication.
+- **Analytics**: Key performance indicators like Total Revenue and Success Rate.
+- **Transaction History**: Detailed logs with M-Pesa receipt references.
+- **Full Audit Trail**: Automatic logging of sensitive system actions.
+- **Export**: Export transaction data to CSV for external reporting.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Tech Stack
+- **Frontend**: React 19, Tailwind CSS 4, Motion (Animations), Lucide icons.
+- **Backend**: Node.js + Express (Handles M-Pesa Daraja API & Callbacks).
+- **Database**: Google Firestore (NoSQL).
+- **Auth**: Firebase Google Authentication.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Setup Instructions
+1. **M-Pesa Credentials**: Obtain your `Consumer Key`, `Consumer Secret`, `Shortcode`, and `Passkey` from [Safaricom Daraja Portal](https://developer.safaricom.co.ke/).
+2. **Environment Variables**: Populate the following in your environment or Secrets panel:
+   - `MPESA_CONSUMER_KEY`
+   - `MPESA_CONSUMER_SECRET`
+   - `MPESA_SHORTCODE`
+   - `MPESA_PASSKEY`
+   - `MPESA_ENVIRONMENT` (sandbox or production)
+   - `APP_URL` (Automatically set in AI Studio)
 
-</div>
+## API Endpoints
+- `POST /api/mpesa/stkpush`: Initiates an STK Push.
+- `POST /api/mpesa/callback`: Webhook handling incoming payment notifications from Safaricom.
+
+## Security
+- **ABAC (Attribute-Based Access Control)**: Enforced via Firestore Security Rules.
+- **Secure Backend**: Sensitive API keys never exposed to the client.
+- **Validation**: Strict schema validation for all writes.

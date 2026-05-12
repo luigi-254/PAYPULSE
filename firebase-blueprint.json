@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "user": {
+      "title": "User",
+      "description": "System admin or staff member",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "staff"] },
+        "name": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role", "createdAt"]
+    },
+    "transaction": {
+      "title": "Transaction",
+      "description": "A payment collection attempt/result",
+      "type": "object",
+      "properties": {
+        "amount": { "type": "number" },
+        "phoneNumber": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "completed", "failed"] },
+        "checkoutRequestId": { "type": "string" },
+        "merchantRequestId": { "type": "string" },
+        "mpesaReceiptNumber": { "type": "string" },
+        "customerMessage": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string" }
+      },
+      "required": ["amount", "phoneNumber", "status", "createdAt", "createdBy"]
+    },
+    "auditLog": {
+      "title": "Audit Log",
+      "description": "Trail of sensitive actions",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "action", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "User profiles and roles"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "transaction",
+      "description": "Payment records"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "auditLog",
+      "description": "System activity logs"
+    }
+  }
+}
